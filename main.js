@@ -29,6 +29,7 @@ DoublyLinkedList.prototype.insert = function(data, index) {
         current.next = node;
         this.numberOfValues++;
       }
+      return;
     }
     counter++;
     current = current.next;
@@ -47,12 +48,14 @@ DoublyLinkedList.prototype.delete = function(index, count) {
     }
   };
   let current = this.head;
-  for (let counter = 1; true; counter++) {
+  let counter = 0;
+  while (true) {
     current = current.next;
     if (counter === index) {
       deleter(current);
       return;
     }
+    counter++;
   }
 };
 
@@ -74,6 +77,7 @@ DoublyLinkedList.prototype.remove = function(data) {
         current.next.prev = current.prev;
       }
       this._length--;
+      return;
     }
     current = current.next;
   }
@@ -107,20 +111,21 @@ DoublyLinkedList.prototype.prepend = function(data) {
 };
 
 DoublyLinkedList.prototype.compare = function(list) {
-  let counter = 0;
-  let current = this.head;
-  while (current) {
-    if (this.current === list.current) counter++;
-    current = current.next;
+  let current1 = this.head;
+  let current2 = list.head;
+  while (current1 || current2) {
+    if (current1 !== current2) return false;
+    current1 = current1.next;
+    current2 = current2.next;
   }
-  counter === this._length ? console.log('true') : false;
+  return true;
 };
 
 DoublyLinkedList.prototype.clone = function() {
   let current = this.head;
   const list = new DoublyLinkedList();
   while (current) {
-    list.append(current);
+    list.append(current.data);
     current = current.next;
   }
   return list;
@@ -133,7 +138,7 @@ DoublyLinkedList.prototype.print = function() {
     string += current.data + ',';
     current = current.next;
   }
-  console.dir(string.trim(), {depth: null});
+  console.log(string.trim());
 };
 
-this.DoublyLinkedList = DoublyLinkedList;
+module.exports = { DoublyLinkedList };
