@@ -1,8 +1,10 @@
-const main = require(__dirname + '/main');
+'use strict';
 
-const list = new main.DoublyLinkedList();
-const list2 = new main.DoublyLinkedList();
-let list3 = new main.DoublyLinkedList();
+const { DoublyLinkedList } = require('./main');
+
+const list = new DoublyLinkedList();
+const list2 = new DoublyLinkedList();
+let list3 = new DoublyLinkedList();
 list.append(1);
 list.append(2);
 list.append(3);
